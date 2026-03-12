@@ -5,7 +5,7 @@ const newCard = ({name, image, description, price, _id}) =>{
     return `
             <div class="card" id=${_id}>
             <h3 class="cardTitle">${name}</h3>
-            <img class="carImag" src=${image} alt="Laptop">
+            <img class="carImag" src=${image} alt="${name}">
             <p class="cardDescrip">${description.slice(0,40)} </p>
             <strong class="cardPrice">${price}</strong>
             <button class="botonAñadido"> Agregar al carrito </button>
@@ -14,11 +14,10 @@ const newCard = ({name, image, description, price, _id}) =>{
 }
 
 const renderCards= (array) => {
-conteinerProductos.innerHTML = ''
-    array.map(item => {
-        conteinerProductos.innerHTML += newCard(item)
-})
+const html =  array.map(item => { return newCard(item)}).join('')
+conteinerProductos.innerHTML = html
 }
+
 
 const handleDetailCard = (_id) => {
     //console.log('Realizaste click'+ evento.target);
@@ -46,7 +45,7 @@ try {
 }
 
 document.addEventListener('DOMContentLoaded', async()=>{
-await getAll()
-addClickDetailCard()
+await getAll();
+addClickDetailCard();
 })
 
